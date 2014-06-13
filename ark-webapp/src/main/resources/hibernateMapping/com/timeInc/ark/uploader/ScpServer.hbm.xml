@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+  Copyright 2014 Time Inc
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+    http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field">
+	<class name="com.timeInc.ark.uploader.ScpServer" table="scp_server">
+		<id name="id" type="java.lang.Integer">
+			<column name="Id" />
+			<generator class="identity" />
+		</id>
+
+		<component name="cred" class="com.timeInc.mageng.util.sftp.ScpCredentials">
+			<property name="username" type="string">
+				<column name="UserName" not-null="true" />
+			</property>
+			
+			<property name="host" type="string">
+				<column name="Host" not-null="true" />
+			</property>
+			
+			<property name="password" type="string">
+				<column name="Password" not-null="true" />
+			</property>
+			
+			<property name="port" type="int">
+				<column name="Port" not-null="true" />
+			</property>
+		</component>
+		
+		<many-to-one name="location" column="Path_Naming_Id" class="com.timeInc.ark.naming.PathNaming" not-null="true" cascade="all" />
+		
+	</class>
+</hibernate-mapping>

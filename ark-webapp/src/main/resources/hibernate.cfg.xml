@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property> 
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>			
+
+		<property name="connection.datasource">java:/comp/env/jdbc/ArkSource</property> 
+
+		<property name="current_session_context_class">thread</property>
+
+		<mapping resource="hibernateMapping/com/timeInc/ark/role/PublicationGroup.hbm.xml" />
+
+		<mapping resource="hibernateMapping/com/timeInc/ark/util/TemplateEmail.hbm.xml" />
+
+		<mapping resource="hibernateMapping/com/timeInc/ark/application/Application.hbm.xml" />
+		
+		<mapping resource="hibernateMapping/com/timeInc/ark/parser/ContentParser.hbm.xml" />
+		<mapping resource="hibernateMapping/com/timeInc/ark/upload/producer/ContentProducer.hbm.xml" />
+		
+		<mapping resource="hibernateMapping/com/timeInc/ark/upload/producer/PreviewProducer.hbm.xml" />
+
+		<mapping resource="hibernateMapping/com/timeInc/ark/uploader/OriginContentUploader.hbm.xml" />
+		<mapping resource="hibernateMapping/com/timeInc/ark/uploader/OriginPreviewUploader.hbm.xml" />
+		<mapping resource="hibernateMapping/com/timeInc/ark/uploader/ScpServer.hbm.xml" />
+		<mapping resource="hibernateMapping/com/timeInc/ark/uploader/DpsServer.hbm.xml" />
+		
+		<mapping resource="hibernateMapping/com/timeInc/ark/issue/Issue.hbm.xml" />
+		<mapping resource="hibernateMapping/com/timeInc/ark/issue/Folio.hbm.xml" />
+		<mapping resource="hibernateMapping/com/timeInc/ark/issue/Article.hbm.xml" />
+		<mapping resource="hibernateMapping/com/timeInc/ark/issue/PaymentType.hbm.xml" />
+		
+		<mapping resource="hibernateMapping/com/timeInc/ark/issue/IssueMeta.hbm.xml" />
+
+
+		<mapping resource="hibernateMapping/com/timeInc/ark/packager/Packager.hbm.xml" />
+		<mapping resource="hibernateMapping/com/timeInc/ark/naming/FileNaming.hbm.xml" />
+		<mapping resource="hibernateMapping/com/timeInc/ark/naming/PathNaming.hbm.xml" />
+		
+		
+		<mapping resource="hibernateMapping/com/timeInc/ark/newsstand/RemoteNewsstandFeed.hbm.xml" />
+
+		<mapping resource="hibernateMapping/com/timeInc/ark/api/push/EchoPush.hbm.xml" />
+		<mapping resource="hibernateMapping/com/timeInc/ark/api/push/PushEvent.hbm.xml" />
+	
+		<mapping resource="hibernateMapping/com/timeInc/ark/api/origin/OriginClient.hbm.xml" />
+		
+		<mapping resource="hibernateMapping/com/timeInc/ark/event/AbstractEvent.hbm.xml" />
+		
+		<mapping resource="hibernateMapping/com/timeInc/ark/media/MediaLocation.hbm.xml" />
+		<mapping resource="hibernateMapping/com/timeInc/ark/media/MediaType.hbm.xml" />
+		<mapping resource="hibernateMapping/com/timeInc/ark/media/uploader/OriginMediaUploader.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>

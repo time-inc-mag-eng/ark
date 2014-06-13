@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<!--
+  Copyright 2014 Time Inc
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+    http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field" package="com.timeInc.ark.event">
+	<class name="IssueEvent" table="event_log">
+	
+		<id name="id" type="java.lang.Integer" column="Id">
+			<generator class="identity" />
+		</id>
+		
+		<discriminator column="Event" type="string" not-null="true" />
+
+		<property name="userName" type="java.lang.String" column="Username" not-null="true" />
+		<property name="name" type="java.lang.String" column="Name" not-null="true" />
+		
+		<property name="description" type="java.lang.String" column="Description" />
+		<property name="date" type="timestamp" column="Occurrence" not-null="true" />
+		
+		<property name="issueName" type="java.lang.String" column="Issue_Name" not-null="true" />
+		<property name="shortDate" type="timestamp" column="Short_Date" not-null="true" />
+		
+		<many-to-one name="publicationGroup" class="com.timeInc.ark.role.PublicationGroup">
+			<column name="Publication_GroupId" not-null="true" />
+		</many-to-one>
+		
+		<subclass name="IssueEvent$MediaUpload" discriminator-value="USER_UPLOADED_MEDIA"/>
+		
+		<subclass name="IssueMetaEvent$NewContent" discriminator-value="USER_UPLOADED_CONTENT">
+			<property name="appName" type="java.lang.String" column="App_Name" not-null="false" />		
+			<property name="referenceId" type="java.lang.String" column="Reference_Id" not-null="false" />	
+		</subclass>
+
+		<subclass name="IssueMetaEvent$UpdateContent" discriminator-value="USER_UPDATED_CONTENT">
+			<property name="appName" type="java.lang.String" column="App_Name" not-null="false" />		
+			<property name="referenceId" type="java.lang.String" column="Reference_Id" not-null="false" />			
+		</subclass>
+
+		<subclass name="IssueMetaEvent$NewPreview" discriminator-value="USER_UPLOADED_PREVIEW">
+			<property name="appName" type="java.lang.String" column="App_Name" not-null="false" />		
+			<property name="referenceId" type="java.lang.String" column="Reference_Id" not-null="false" />			
+		</subclass>
+
+		<subclass name="IssueMetaEvent$UpdatePreview" discriminator-value="USER_UPDATED_PREVIEW">
+			<property name="appName" type="java.lang.String" column="App_Name" not-null="false" />		
+			<property name="referenceId" type="java.lang.String" column="Reference_Id" not-null="false" />			
+		</subclass>
+		
+		<subclass name="IssueMetaEvent$PublishContent" discriminator-value="USER_PUBLISHED_CONTENT">
+			<property name="appName" type="java.lang.String" column="App_Name" not-null="false" />		
+			<property name="referenceId" type="java.lang.String" column="Reference_Id" not-null="false" />			
+		</subclass>
+		
+		<subclass name="IssueMetaEvent$Creation" discriminator-value="ADMIN_CREATED_ISSUE_META">
+			<property name="appName" type="java.lang.String" column="App_Name" not-null="false" />		
+			<property name="referenceId" type="java.lang.String" column="Reference_Id" not-null="false" />			
+		</subclass>	
+
+		<subclass name="IssueMetaEvent$UnpublishFolio" discriminator-value="ADMIN_UNPUBLISH_FOLIO">
+			<property name="appName" type="java.lang.String" column="App_Name" not-null="false" />		
+			<property name="referenceId" type="java.lang.String" column="Reference_Id" not-null="false" />			
+		</subclass>	
+
+
+		<subclass name="IssueMetaEvent$DeleteFolio" discriminator-value="ADMIN_DELETED_FOLIO">
+			<property name="appName" type="java.lang.String" column="App_Name" not-null="false" />		
+			<property name="referenceId" type="java.lang.String" column="Reference_Id" not-null="false" />			
+		</subclass>	
+
+		<subclass name="IssueMetaEvent$Update" discriminator-value="ADMIN_UPDATED_ISSUE_META">
+			<property name="appName" type="java.lang.String" column="App_Name" not-null="false" />		
+			<property name="referenceId" type="java.lang.String" column="Reference_Id" not-null="false" />			
+		</subclass>
+		
+		<subclass name="IssueMetaEvent$Deletion" discriminator-value="ADMIN_DELETED_ISSUE_META">
+			<property name="appName" type="java.lang.String" column="App_Name" not-null="false" />		
+			<property name="referenceId" type="java.lang.String" column="Reference_Id" not-null="false" />			
+		</subclass>		
+		
+		<subclass name="IssueMetaEvent$PushSchedule" discriminator-value="USER_PUSH_SCHEDULED">
+			<property name="appName" type="java.lang.String" column="App_Name" not-null="false" />		
+			<property name="referenceId" type="java.lang.String" column="Reference_Id" not-null="false" />		
+		</subclass>
+		
+	</class>
+</hibernate-mapping>

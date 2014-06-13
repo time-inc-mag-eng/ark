@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+  Copyright 2014 Time Inc
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+    http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 27, 2010 4:49:15 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping default-access="field">
+    <class name="com.timeInc.ark.application.Email" table="application_email">
+        <id name="id" type="integer">
+            <column name="Id" />
+            <generator class="identity" />
+        </id>
+        
+        
+        <property name="previewEmailList" type="string">
+			<column name="Preview_Email_List" length="1000"/>        
+        </property>
+        
+        <property name="contentEmailList" type="string">
+			<column name="Content_Email_List" length="1000"/>        
+        </property>   
+        
+        <property name="previewEmailBodyXSL" type="string">
+			<column name="Preview_Email_Body_XSL" length="500"/>        
+        </property>
+        
+        <property name="contentEmailBodyXSL" type="string">
+			<column name="Content_Email_Body_XSL" length="500"/>        
+        </property>
+        
+        <property name="previewEmailSubjectXSL" type="string">
+			<column name="Preview_Email_Subject_XSL" length="500"/>        
+        </property>
+        
+        <property name="contentEmailSubjectXSL" type="string">
+			<column name="Content_Email_Subject_XSL" length="500"/>        
+        </property>
+                      
+      </class>
+</hibernate-mapping>

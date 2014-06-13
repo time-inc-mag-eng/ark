@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+  Copyright 2014 Time Inc
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+    http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping default-access="field" package="com.timeInc.ark.packager">
+	<class name="SingleNamingPackager" table="package_setting">
+		<id name="id" type="integer" column="Id">
+			<generator class="identity" />
+		</id>
+		
+		<discriminator column="type" type="string" not-null="true" />
+
+		<many-to-one name="parentPacker" column="Parent_Packer_Id" class="SingleNamingPackager" fetch="join" />
+		<many-to-one name="naming" column="File_Naming_Id" class="com.timeInc.ark.naming.FileNaming" not-null="true" fetch="join" cascade="all" />
+		
+		<subclass name="Tar" discriminator-value="TAR" />
+		<subclass name="Zip" discriminator-value="ZIP" />
+		<subclass name="Renaming" discriminator-value="RENAMING" />
+		<subclass name="Noop" discriminator-value="NOOP" />
+	</class>
+</hibernate-mapping>

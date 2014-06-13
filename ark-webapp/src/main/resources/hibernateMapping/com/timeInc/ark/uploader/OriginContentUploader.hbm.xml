@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+  Copyright 2014 Time Inc
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+    http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package="com.timeInc.ark.uploader">
+	<class name="OriginContentUploader" table="origin_content">
+		<id name="id" type="java.lang.Integer">
+			<column name="Id" />
+			<generator class="identity" />
+		</id>
+
+		<property name="baseUrl_protected" type="string">
+			<column name="Base_URL_Protected" length="250" not-null="true" />
+		</property>
+	
+		<property name="protectedDir" type="string">
+			<column name="Protected_Dir" length="250" not-null="true" />
+		</property>
+	
+		<property name="originPath" type="string" column="Origin_Path" />
+
+		<many-to-one name="client" class="com.timeInc.ark.api.origin.OriginClient" column="Origin_Server_Id" fetch="join" />
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+  Copyright 2014 Time Inc
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+    http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 27, 2010 4:49:15 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping default-access="field">
+	<class name="com.timeInc.ark.api.origin.OriginClient" table="origin_server" >
+		<id name="id" type="integer">
+			<column name="Id" />
+			<generator class="identity" />
+		</id>
+
+		<property name="originServer" type="string" column="Origin_Server" />
+		<property name="originPort" type="integer" column="Origin_Port" />
+		<property name="originUsername" type="string" column="Origin_Username" />
+		<property name="originPassword" type="string" column="Origin_Password" update="false" />
+
+	</class>
+</hibernate-mapping>

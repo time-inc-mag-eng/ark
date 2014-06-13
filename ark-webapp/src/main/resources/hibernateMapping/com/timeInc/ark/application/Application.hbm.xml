@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<!--
+  Copyright 2014 Time Inc
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+    http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package="com.timeInc.ark.application">
+	<class name="Application" abstract="true" table="base_application" batch-size="10">
+	
+		<id name="id" type="integer">
+			<column name="Id" />
+			<generator class="identity" />
+		</id>
+
+		<many-to-one name="publicationGroup" class="com.timeInc.ark.role.PublicationGroup">
+			<column name="Publication_GroupId" not-null="true" />
+		</many-to-one>
+		
+		
+		<set name="metas" table="issue_meta" inverse="true">
+			<key column="ApplicationId" />
+			<one-to-many class="com.timeInc.ark.issue.IssueMeta" />
+		</set>		
+		
+		
+		<many-to-one name="contentEmail" class="com.timeInc.ark.util.TemplateEmail" column="Content_Email_Id" cascade="all"/>	
+		<many-to-one name="previewEmail" class="com.timeInc.ark.util.TemplateEmail" column="Preview_Email_Id" cascade="all" />	
+		
+		<property name="name" type="string">
+			<column name="Name" length="50" not-null="true" />
+		</property>
+
+		<property name="productId" type="string">
+			<column name="Product_Id" length="250" not-null="true" />
+		</property>
+
+		<property name="vendorPubName" column="Publication_Vendor_Name" not-null="true" />
+
+		<property name="active" type="boolean" column="Active" not-null="true" />
+		<property name="requireContentFirst" type="boolean" column="Content_First" not-null="true" />
+		
+		
+		<property name="sendMsg" type="boolean" column="Send_Msg" not-null="true" />
+		
+		<property name="defaultPrice" type="big_decimal" column="Default_Price" not-null="true" />
+		
+		<joined-subclass name="ScpApplication" table="scp_application">
+			<key column="Base_Application_Id" />
+			
+			<many-to-one name="contentProducer" class="com.timeInc.ark.upload.producer.ContentProducer" column="Content_Setting_Id" not-null="true" lazy="false" cascade="all"/>	
+			<many-to-one name="uploader" class="com.timeInc.ark.uploader.ScpServer" column="Scp_Server_Id" not-null="true" cascade="all"/>	
+			<many-to-one name="previewProducer" class="com.timeInc.ark.upload.producer.PreviewProducer$SinglePreviewProducer" column="Preview_Setting_Id" not-null="true" lazy="false" cascade="all"/>
+		</joined-subclass>
+		
+		
+		<joined-subclass name="CdsApplication" table="cds_application">
+			<key column="Base_Application_Id" />
+			
+			<component name="auth" class="com.timeInc.ark.api.ww.CdsConfig$Auth">
+				<property name="minVersion" type="string" column="Min_Version" not-null="true" />
+				<property name="publishKey" type="string" column="Publish_Key" not-null="true" />
+				<property name="issueKey" type="string" column="Issue_Key" not-null="true" />
+				<property name="productKey" type="string" not-null="true" column="Product_Key" />
+				<property name="subscription" type="boolean" column="Subscription" not-null="true" />
+    		</component>
+			   
+			<many-to-one name="contentProducer" class="com.timeInc.ark.upload.producer.ContentProducer$CdsContentProducer" column="Content_Setting_Id" not-null="true" lazy="false" cascade="all"/>						
+			<many-to-one name="contentUploader" class="com.timeInc.ark.uploader.OriginContentUploader" column="Origin_Content_Id" not-null="true" cascade="all"/>	
+
+			<many-to-one name="previewProducer" class="com.timeInc.ark.upload.producer.PreviewProducer$CdsPreviewProducer" column="Preview_Setting_Id" not-null="true" lazy="false" cascade="all" />
+			<many-to-one name="previewUploader" class="com.timeInc.ark.uploader.OriginPreviewUploader" column="Origin_Preview_Id" not-null="true"  cascade="all"/>							
+
+			<many-to-one name="pushServer" class="com.timeInc.ark.api.push.EchoPush" column="Echo_Id" cascade="all"/>				
+			<many-to-one name="feed" class="com.timeInc.ark.newsstand.RemoteNewsstandFeed" column="Ns_Feed_Id"  cascade="all"/>	
+		</joined-subclass>
+		
+			
+		<joined-subclass name="DpsApplication" table="dps_application">
+			<key column="Base_Application_Id" />
+			<property name="rendition" column="Rendition" not-null="true">
+				<type name="org.hibernate.type.EnumType">
+					<param name="enumClass">com.timeInc.dps.producer.enums.Viewer</param>
+					<param name="type">12</param>
+				</type>
+			</property>
+			
+			<property name="autoPublish" type="boolean" column="Auto_Publish" />
+
+			<many-to-one name="previewProducer" class="com.timeInc.ark.upload.producer.PreviewProducer$DpsPreviewProducer" column="Preview_Setting_Id" not-null="true" lazy="false" cascade="all"/>
+			<many-to-one name="pushServer" class="com.timeInc.ark.api.push.EchoPush" column="Echo_Id" cascade="all"/>				
+			<many-to-one name="feed" class="com.timeInc.ark.newsstand.RemoteNewsstandFeed" column="Ns_Feed_Id" cascade="all"/>	
+			<many-to-one name="previewUploader" class="com.timeInc.ark.uploader.OriginPreviewUploader" column="Origin_Preview_Id" cascade="all"/>				
+			<many-to-one name="dpsServer" class="com.timeInc.ark.uploader.DpsServer" column="Dps_Server_Id" not-null="true" cascade="all"/>	
+		</joined-subclass>		
+		
+	</class>
+</hibernate-mapping>

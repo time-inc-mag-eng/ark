@@ -1,0 +1,103 @@
+.x-grid-row ,.x-grid-cell, .x-unselectable, .x-unselectable * {
+ -webkit-user-select: text !important;
+ -o-user-select: text !important;
+ -khtml-user-select: all !important;
+ -ms-user-select: text !important;
+ user-select: text !important;
+ -moz-user-select: text !important;
+} 
+
+.upload-icon {
+	background: url('../icons/fam/image_add.png') no-repeat 0 0
+		!important;
+}
+/* custom icon for preview column */
+.x-action-col-cell img.avail-col {
+	background-image: url(../icons/fam/application_go.png);
+}
+
+.x-action-col-cell img.na-col {
+	background-image: url(../icons/fam/cross.gif);
+}
+
+.x-action-col-cell img {
+	height: 16px;
+	width: 16px;
+}
+
+.next {
+	background-image: url(../themes/images/default/grid/page-next.gif) !important;
+}
+.prev {
+	background-image: url(../themes/images/default/grid/page-prev.gif) !important;
+}
+
+.icon-help .x-form-field {
+	padding: 0px !important;
+	marging: 0px !important;
+	border: 0 !important;
+	background-image: url(../icons/fam/information.png) !important;
+	background-color: transparent !important;
+	background-repeat: no-repeat !important;
+	background-position: center !important; 
+
+}
+.icon-help{
+	padding: 0px !important;
+	marging: 0px !important;
+	border: 0 !important;
+	background-image: url(../icons/fam/information.png) !important;
+	background-color: transparent !important;
+	background-repeat: no-repeat !important;
+	background-position:center center !important; 
+
+}
+.icon-user-add {
+	background-image: url(../icons/fam/add.gif) !important;
+}
+
+.icon-user-delete {
+	background-image: url(../icons/fam/delete.gif) !important;
+}
+
+.icon-user-save {
+	background-image: url(../icons/fam/save.gif) !important;
+}
+
+.refresh {
+	background-image: url(../themes/images/default/grid/refresh.gif) !important;
+}
+
+.icon-user-pdf {
+	background-image: url(../icons/fam/pdf.png) !important;
+}
+
+.icon-user-excel {
+	background-image: url(../icons/fam/excel.jpg) !important;
+}
+
+.x-tab button {
+	overflow: visible;
+}
+
+.accordion-panel  .x-tool
+{
+    left: 0 !important;
+
+}
+.accordion-panel .x-panel-header-text-container
+{
+    padding-left: 18px;
+}
+.accordion-panel .x-panel-header-text
+{
+    padding-left: 5px;
+}
+.x-accordion-hd .x-tool-expand-top,
+.x-accordion-hd .x-tool-collapse-top {
+
+}
+
+.x-accordion-hd .x-tool-expand-bottom,
+.x-accordion-hd .x-tool-collapse-bottom {}
+
